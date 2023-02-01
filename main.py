@@ -1,16 +1,24 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from linearRegression import *
+def Perform(name):
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    data = list(csv.reader(open('test.csv')))
+    test = list(csv.reader(open('val.csv')))
+    for x in data:
+        for y in x:
+            y = float(y)
+    for x in test:
+        for y in x:
+            y = float(y)
+    model=LinearRegression(data,constant=5,errorpercent=False,path='vartest')
+    print(model.__dict__)
 
+    model.trainsimpleLR(100,0.0000001,printable=False,selftest=True,testdata=test.copy(),showdot=110)
+    model.save()
+    model.report()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    Perform('PyCharm')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
