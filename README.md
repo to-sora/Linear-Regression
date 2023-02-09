@@ -25,8 +25,8 @@ It will observe the length output from csv in auto.
 |||
 |trainsimpleLR||
 |(self, epoch: int = 1, learning_rate: float = 1, learning_decay:bool = True ,|||
-|learning_decay_rate:float = 0.7,|epoch|
-|printable: bool = True, testdata: list = None,|learning_rate|
+|learning_decay_rate:float = 0.7,|epoch|Number of epoch|
+|printable: bool = True, testdata: list = None,|learning_rate|learning rate in training|
 |selftest: bool = True,showdot=1):|learning_decay| apply learning rate decay|
 ||learning_decay_rate|if use learning rate decay the learning will be calculated by a=(1/(1+epochs*learning_decay_rate))*learning_rate|
 ||printable|print detail or not|

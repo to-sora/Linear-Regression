@@ -125,19 +125,19 @@ class Trainmodelreport:
 
         for i in [str(x) for x in self.val[len(self.val)-1].deatilrecord]:
             print(i)
-        print('trainmaxerrorlist'+str(self.trainmaxerrorlist[-1]))
-        print('trainminerrorlist'+str(self.trainminerrorlist[-1]))
-        print('trainavgerrorlist'+str(self.trainavgerrorlist[-1]))
-        print('trainmaxRM2list'+str(self.trainmaxRM2list[-1]))
-        print('trainminRM2list'+str(self.trainminRM2list[-1]))
-        print('trainavgRM2list'+str(self.trainavgRM2list[-1]))
+        print('trainmaxerrorlist   '+str(self.trainmaxerrorlist[-1]))
+        print('trainminerrorlist   '+str(self.trainminerrorlist[-1]))
+        print('trainavgerrorlist   '+str(self.trainavgerrorlist[-1]))
+        print('trainmaxRM2list     '+str(self.trainmaxRM2list[-1]))
+        print('trainminRM2list     '+str(self.trainminRM2list[-1]))
+        print('trainavgRM2list     '+str(self.trainavgRM2list[-1]))
 
-        print('valmaxerrorlist'+str(self.valmaxerrorlist[-1]))
-        print('valminerrorlist'+str(self.valminerrorlist[-1]))
-        print('valavgerrorlist'+str(self.valavgerrorlist[-1]))
-        print('valmaxRM2list'+str(self.valmaxRM2list[-1]))
-        print('valminRM2list'+str(self.valminRM2list[-1]))
-        print('valavgRM2list'+str(self.valavgRM2list[-1]))
+        print('valmaxerrorlist     '+str(self.valmaxerrorlist[-1]))
+        print('valminerrorlist     '+str(self.valminerrorlist[-1]))
+        print('valavgerrorlist     '+str(self.valavgerrorlist[-1]))
+        print('valmaxRM2list       '+str(self.valmaxRM2list[-1]))
+        print('valminRM2list       '+str(self.valminRM2list[-1]))
+        print('valavgRM2list       '+str(self.valavgRM2list[-1]))
 class LinearRegression():
 
     def __init__(self, data: list, path: str = None, constant: float = float(1),errorpercent:bool=True):
