@@ -141,10 +141,10 @@ class Trainmodelreport:
 class LinearRegression():
 
     def __init__(self, data: list, path: str = None, constant: float = float(1),errorpercent:bool=True):
-        self.constant = constant
-        self.path = path
+        self.constant = constant # number of input
+        self.path = path         # output path
         self.rawdata = copy.deepcopy(data)
-        self.errorpercent=errorpercent
+        self.errorpercent=errorpercent # calculate error in percentage
         self.traindataoutput = [float(x[-1]) for x in copy.deepcopy(data)]
 
 
@@ -185,17 +185,23 @@ class LinearRegression():
 
         return out
 
-    def trainsimpleLR(self, epoch: int = 1, learning_rate: float = 1, printable: bool = True, testdata: list = None,
+    def trainsimpleLR(self, epoch: int = 1, learning_rate: float = 1, learning_decay:bool = True ,
+                     learning_decay_rate:float = 0.7,
+                      printable: bool = True, testdata: list = None,
                       selftest: bool = True,showdot=1):
         self.trainreport.reset()
 
         for epochs in range(epoch):
             #print( self.traindataoutput)
+            if learning_decay:
+                a=(1/(1+epochs*learning_decay_rate))*learning_rate
+            else:
+                a=learning_rate
             for i in range(self.numberOfDimensionincludeconstant):
-                self.var[i] -= learning_rate * \
-                               sum([(self.var_multi_input(self.traindatainput[x]) - self.traindataoutput[x])
+                temp = [(self.var_multi_input(self.traindatainput[x]) - self.traindataoutput[x])
                                     * float(self.traindatainput[x][i])
-                                    for x in range(self.numberofdata)])
+                                    for x in range(self.numberofdata)]
+                self.var[i] -= a * sum(temp)/len(temp)
             if printable:
                 print(self.var)
             if showdot:
