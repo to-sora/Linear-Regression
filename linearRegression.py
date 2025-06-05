@@ -232,14 +232,29 @@ class LinearRegression():
         np.save(self.path, np.asarray(self.var))
 
 
-def use(input: list, var):
-    output = 0
-    assert type(input) == list
+def use(input: list, var, constant: float = 1.0):
+    """Predict an output using the trained variables.
+
+    Parameters
+    ----------
+    input : list
+        Input feature vector.
+    var : list
+        Trained weights including the bias as the last element.
+    constant : float, optional
+        Constant value appended to the input to model the bias term.
+
+    Returns
+    -------
+    float
+        The predicted value.
+    """
+
+    assert isinstance(input, list)
     assert len(input) + 1 == len(var)
-    input.append(0)
-    for i in range(len(input)):
-        output += float(var[i]) * float(input[i])
-    return output
+
+    data = input + [constant]
+    return sum(float(v) * float(x) for v, x in zip(var, data))
 # data = list(csv.reader(open('test.csv')))
 # test = list(csv.reader(open('val.csv')))
 # for x in data:
