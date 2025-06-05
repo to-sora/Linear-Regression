@@ -4,17 +4,17 @@ import numpy as np
 
 
 class Record:
-    def __init__(self, inputdata, target, perdictoutome, errorpercent: bool = True):
+    def __init__(self, inputdata, target, predict_outcome, errorpercent: bool = True):
         self.target = target
-        self.perdictionoutcome = perdictoutome
+        self.prediction_outcome = predict_outcome
         self.input = inputdata[:3]
         self.errorinpercent = errorpercent
-        assert type(self.target) == type(self.perdictionoutcome)
+        assert type(self.target) == type(self.prediction_outcome)
         assert type(self.target) != (list or tuple or dict)
         try:
             self.target = float(self.target)
-            self.perdictionoutcome = float(self.perdictionoutcome)
-            self.abserror = abs(self.target - self.perdictionoutcome)
+            self.prediction_outcome = float(self.prediction_outcome)
+            self.abserror = abs(self.target - self.prediction_outcome)
             self.RM2 = self.abserror ** 2
             if self.errorinpercent:
                 self.abserror /= self.target
@@ -22,19 +22,19 @@ class Record:
         except:
             try:
                 self.target = str(self.target)
-                self.perdictionoutcome = str(perdictoutome)
+                self.prediction_outcome = str(predict_outcome)
                 self.correct = True
             except:
                 self.target = str(self.target)
-                self.perdictionoutcome = str(self.perdictionoutcome)
-        assert type(self.target) == type(self.perdictionoutcome)
+                self.prediction_outcome = str(self.prediction_outcome)
+        assert type(self.target) == type(self.prediction_outcome)
 
     def __str__(self):
         if self.errorinpercent:
-            return f"Record : Input[3]{self.input[:3]} perdict :{self.perdictionoutcome}  error in % {self.abserror}% target {self.target}"
+            return f"Record : Input[3]{self.input[:3]} perdict :{self.prediction_outcome}  error in % {self.abserror}% target {self.target}"
 
         else:
-            return f"Record : Input[3]{self.input[:3]} perdict :{self.perdictionoutcome}  abserror {self.abserror} target {self.target}"
+            return f"Record : Input[3]{self.input[:3]} perdict :{self.prediction_outcome}  abserror {self.abserror} target {self.target}"
 
 
 class Testreport():
@@ -44,24 +44,24 @@ class Testreport():
 
         if detail is not None:
             self.detail = detail
-        self.deatilrecord = []
+        self.detail_record = []
 
     def addrecord(self, record: Record):
         assert type(record) == Record
-        self.deatilrecord.append(record)
+        self.detail_record.append(record)
 
-    def analyaze(self):
+    def analyze(self):
         if self.numberouput:
-            self.maxerror = max([x.__dict__['abserror'] for x in self.deatilrecord])
-            self.minerror = min([x.__dict__['abserror'] for x in self.deatilrecord])
-            self.avgerror = sum([x.__dict__['abserror'] for x in self.deatilrecord]) / len(self.deatilrecord)
+            self.maxerror = max([x.__dict__['abserror'] for x in self.detail_record])
+            self.minerror = min([x.__dict__['abserror'] for x in self.detail_record])
+            self.avgerror = sum([x.__dict__['abserror'] for x in self.detail_record]) / len(self.detail_record)
 
-            self.avgRM2 = sum([x.__dict__['RM2'] for x in self.deatilrecord]) / len(self.deatilrecord)
-            self.maxRM2 = max([x.__dict__['RM2'] for x in self.deatilrecord])
-            self.minRM2 = min([x.__dict__['RM2'] for x in self.deatilrecord])
+            self.avgRM2 = sum([x.__dict__['RM2'] for x in self.detail_record]) / len(self.detail_record)
+            self.maxRM2 = max([x.__dict__['RM2'] for x in self.detail_record])
+            self.minRM2 = min([x.__dict__['RM2'] for x in self.detail_record])
 
     def Drop(self):
-        del self.deatilrecord
+        del self.detail_record
 
 
 class Trainmodelreport:
@@ -102,14 +102,14 @@ class Trainmodelreport:
         plt.plot(self.trainindex, self.trainminerrorlist, label='trainminerror')
         plt.plot(self.trainindex, self.trainavgerrorlist, label='trainavgerror')
         plt.ylabel('Error')
-        plt.xlabel('expoch')
+        plt.xlabel('epoch')
         plt.legend()
         plt.show()
         plt.plot(self.trainindex, self.trainmaxRM2list, label='trainmaxRM2')
         plt.plot(self.trainindex, self.trainminRM2list, label='trainminRM2')
         plt.plot(self.trainindex, self.trainavgRM2list, label='trainavgRM2')
         plt.ylabel('Error')
-        plt.xlabel('expoch')
+        plt.xlabel('epoch')
         plt.legend()
         plt.show()
 
@@ -117,18 +117,18 @@ class Trainmodelreport:
         plt.plot(self.valindex, self.valminerrorlist, label='valminerror')
         plt.plot(self.valindex, self.valavgerrorlist, label='valavgerror')
         plt.ylabel('Error')
-        plt.xlabel('expoch')
+        plt.xlabel('epoch')
         plt.legend()
         plt.show()
         plt.plot(self.valindex, self.valmaxRM2list, label='valmaxRM2')
         plt.plot(self.valindex, self.valminRM2list, label='valminRM2')
         plt.plot(self.valindex, self.valavgRM2list, label='valavgRM2')
         plt.ylabel('Error')
-        plt.xlabel('expoch')
+        plt.xlabel('epoch')
         plt.legend()
         plt.show()
 
-        for i in [str(x) for x in self.val[len(self.val) - 1].deatilrecord]:
+        for i in [str(x) for x in self.val[len(self.val) - 1].detail_record]:
             print(i)
         print('trainmaxerrorlist   ' + str(self.trainmaxerrorlist[-1]))
         print('trainminerrorlist   ' + str(self.trainminerrorlist[-1]))
@@ -188,7 +188,7 @@ class LinearRegression():
             temprecord = Record(testinput[i], float(testoutput[i]), float(self.var_multi_input(testinput[i])),
                                 errorpercent=self.errorpercent)
             out.addrecord(temprecord)
-        out.analyaze()
+        out.analyze()
 
         return out
 

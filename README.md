@@ -1,12 +1,12 @@
 # Linear-Regression
 ## It is a project on visualizing linear regression. 
-The class take input from csv and generate result on matpollib.
+The class take input from csv and generate result on matplotlib.
 This project is aim at using multiple linear regression in observing relationship of data from excel.
 <img src = "Figure_3.png">
 
 ## The format of csv file
 1.  Save excel as csv dos (Not CSV UTF-8)
-2.  The last row will be the outbut
+2.  The last row will be the output
 3.  Only support numeric data type
 ## Demo
 There is a demo in <a href="https://github.com/waito3209/Linear-Regression/blob/master/main.py">main.py</a>. The demo use the data from seed.xlsx. <br>
